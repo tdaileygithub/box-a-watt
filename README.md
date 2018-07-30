@@ -65,3 +65,10 @@ killawatt 3d printed box cover, image processing and emoncms display of power us
 	sudo chmod 666 /var/log/emoncms.log
 
 	http://localhost/emoncms/
+
+# ssocr
+
+	Used to process pictures captured with raspistill
+
+	https://github.com/auerswal/ssocr
+	sudo apt-get install libimlib2-dev
