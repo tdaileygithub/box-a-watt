@@ -1,6 +1,12 @@
 # box-a-watt
 killawatt 3d printed box cover, image processing and emoncms display of power usage
 
+# disable red camera capture led
+
+	sudo nano /boot/config.txt
+	disable_camera_led=1
+	sudo reboot
+
 # Emoncms  setup
 
 	sudo apt-get install apache2 mysql-server mysql-client php libapache2-mod-php php-mysql php-curl php-pear php-dev php-mcrypt php-json git-core redis-server build-essential -y
@@ -72,3 +78,5 @@ killawatt 3d printed box cover, image processing and emoncms display of power us
 
 	https://github.com/auerswal/ssocr
 	sudo apt-get install libimlib2-dev
+
+ 	./ssocr -v -d -1 -P -S -D -t 20 crop 650 410 600 500  remove_isolated erosion 3 opening 3 ../29_07_2018_00_58_47.jpg
