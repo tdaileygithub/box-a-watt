@@ -1,0 +1,3 @@
+[submodule "pi_documentation"]
+	path = pi_documentation
+	url = ../../raspberrypi/documentation.git
