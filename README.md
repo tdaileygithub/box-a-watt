@@ -10,8 +10,8 @@ killawatt 3d printed box cover, image processing and emoncms display of power us
 # Emoncms  setup
 
 	sudo apt-get install apache2 mysql-server mysql-client php libapache2-mod-php php-mysql php-curl php-pear php-dev php-mcrypt php-json git-core redis-server build-essential -y
-	mysql_secure_installation
-	mysqld --initialize
+	sudo mysql_secure_installation
+	sudo mysqld --initialize
 	sudo mysqladmin -p -u root version
 
 	sudo pear channel-discover pear.swiftmailer.org
@@ -45,6 +45,7 @@ killawatt 3d printed box cover, image processing and emoncms display of power us
 	CREATE USER 'emoncms'@'localhost' IDENTIFIED BY 'YOUR_SECURE_PASSWORD_HERE';
 	GRANT ALL ON emoncms.* TO 'emoncms'@'localhost';
 	flush privileges;
+	exit
 
 	sudo mkdir /var/lib/phpfiwa
 	sudo mkdir /var/lib/phpfina
@@ -58,7 +59,7 @@ killawatt 3d printed box cover, image processing and emoncms display of power us
 	cp default.settings.php settings.php
 
 	nano settings.php
-	$username = "USERNAME";
+	$username = "emoncms";
 	$password = "YOUR_SECURE_PASSWORD_HERE";
 	$server   = "localhost";
 	$database = "emoncms";
