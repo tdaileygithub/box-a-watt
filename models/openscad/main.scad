@@ -17,4 +17,9 @@ tilt = 4;
 thickness = 10.0 + 1.5;  // From inner model (need to cleanup code/refactor)
 
 %rotate([-tilt, 0, 0])translate([0,0,thickness/2.0])lightBox_model();
+
+// Print the wedge
 lightBox_wedge(angle=tilt);
+
+// Print the Camera and Light mount
+translate([75,0,0]) lightBox_camera_mount();
