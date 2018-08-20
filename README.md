@@ -1,18 +1,34 @@
 # box-a-watt
 killawatt 3d printed box cover, image processing and emoncms display of power usage
 
-# disable red camera capture led
+# Pi Setup
+
+## Disable red camera capture led
 
 	sudo nano /boot/config.txt
 	disable_camera_led=1
 	sudo reboot
 
-# Emoncms  setup
+# [Emoncms](https://emoncms.org) setup
+
+## Install Emoncms package dependencies 
 
 	sudo apt-get install apache2 mysql-server mysql-client php libapache2-mod-php php-mysql php-curl php-pear php-dev php-mcrypt php-json git-core redis-server build-essential -y
+
+## mysql installation
+
 	sudo mysql_secure_installation
 	sudo mysqld --initialize
 	sudo mysqladmin -p -u root version
+
+	sudo mysql -u root -p
+	CREATE DATABASE emoncms DEFAULT CHARACTER SET utf8;
+	CREATE USER 'emoncms'@'localhost' IDENTIFIED BY 'YOUR_SECURE_PASSWORD_HERE';
+	GRANT ALL ON emoncms.* TO 'emoncms'@'localhost';
+	flush privileges;
+	exit
+
+## apache and php configuration
 
 	sudo pear channel-discover pear.swiftmailer.org
 	sudo pecl install swift/swift redis
@@ -40,13 +56,6 @@ killawatt 3d printed box cover, image processing and emoncms display of power us
 	cd /var/www/html/emoncms
 	git pull
 
-	sudo mysql -u root -p
-	CREATE DATABASE emoncms DEFAULT CHARACTER SET utf8;
-	CREATE USER 'emoncms'@'localhost' IDENTIFIED BY 'YOUR_SECURE_PASSWORD_HERE';
-	GRANT ALL ON emoncms.* TO 'emoncms'@'localhost';
-	flush privileges;
-	exit
-
 	sudo mkdir /var/lib/phpfiwa
 	sudo mkdir /var/lib/phpfina
 	sudo mkdir /var/lib/phptimeseries
@@ -54,6 +63,15 @@ killawatt 3d printed box cover, image processing and emoncms display of power us
 	sudo chown www-data:root /var/lib/phpfiwa
 	sudo chown www-data:root /var/lib/phpfina
 	sudo chown www-data:root /var/lib/phptimeseries
+
+	cd /var/www/html/emoncms/Modules
+	git clone https://github.com/emoncms/dashboard.git
+	git clone https://github.com/emoncms/app.git
+	
+	sudo touch /var/log/emoncms.log
+	sudo chmod 666 /var/log/emoncms.log
+
+## emoncms configuration
 
 	cd /var/www/html/emoncms/
 	cp default.settings.php settings.php
@@ -64,20 +82,23 @@ killawatt 3d printed box cover, image processing and emoncms display of power us
 	$server   = "localhost";
 	$database = "emoncms";
 
-	cd /var/www/html/emoncms/Modules
-	git clone https://github.com/emoncms/dashboard.git
-	git clone https://github.com/emoncms/app.git
-	
-	sudo touch /var/log/emoncms.log
-	sudo chmod 666 /var/log/emoncms.log
-
 	http://localhost/emoncms/
 
-# ssocr
+# [ssocr](https://github.com/auerswal/ssocr)
 
-	Used to process pictures captured with raspistill
+[ssorc manual](https://www.unix-ag.uni-kl.de/~auerswal/ssocr/)
 
-	https://github.com/auerswal/ssocr
+Used to process images captured with raspistill.
+
+## Install ssocr dependencies 
+
 	sudo apt-get install libimlib2-dev
+
+## make
+
+	cd ssocr
+	make
+
+## example command
 
  	./ssocr -v -d -1 -P -S -D -t 20 crop 650 410 600 500  remove_isolated erosion 3 opening 3 ../29_07_2018_00_58_47.jpg
