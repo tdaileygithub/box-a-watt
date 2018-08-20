@@ -1,5 +1,15 @@
 # box-a-watt
-killawatt 3d printed box cover, image processing and emoncms display of power usage
+
+killawatt P4400 with 3d printed box cover, image processing and emoncms display of power usage.
+
+# Parts List [work in progress]
+
+- [$20 - P3 P4400 kill a watt](https://www.amazon.com/P3-P4400-Electricity-Usage-Monitor/dp/B00009MDBU)
+- [$5 - Lowe's - Black Solar LED Path Light](https://www.lowes.com/pd/Portfolio-4x-Brighter-4-8-Lumen-Black-Solar-LED-Path-Light/1000398433)
+- [$10 - Pi Zero W](https://www.adafruit.com/product/3400)
+- [$2 - LED Backlight Small](https://www.adafruit.com/product/1626)
+
+**Total** : $37
 
 # Pi Setup
 
