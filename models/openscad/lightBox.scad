@@ -9,33 +9,28 @@ measuredLength        = 176.0;
 
 measuredCornerRadius  =   5.0;    // A Guess --- looks about right for the rounding of edges 
 
-
-// Model values
-lightBox_endcap_offset = -measuredWallThickness/2.0;
+additionalThickness   =  10.0; 
 
 // The light box is a simple hollow rectangle.  
 module lightBox_model() {
 rounded_hollow_box(
-	width=measuredInnerWidth, 
-	length=measuredInnerWidth, 
-	height=measuredLength,
+	width=measuredInnerWidth,
+	height=measuredInnerWidth,
+	length=measuredLength,
 	thickness=measuredWallThickness,
 	cornerRadius=measuredCornerRadius
 	);
 }
 
-module lightBox_endcap() {
-rounded_box_endcap_extra(
-    width=measuredInnerWidth,
-	length=measuredInnerWidth,
+
+module lightBox_wedge(ange=0.0) {
+    rounded_sloped_box_gasket(
+        width=measuredInnerWidth,
+	height=measuredInnerWidth,
 	wallThickness=measuredWallThickness,
 	cornerRadius=measuredCornerRadius,
-	additionalThickness=6.0
+	additionalThickness=additionalThickness,
+	angle=angle
 	);
 }
 
-module lightBox_wedge() {
-lightBox_endcap();
-translate([measureedInnerWidth/2.0, measuredInnerWidth/2.0, -40])
-    cube([measuredInnerWidth, measuredInnerWidth, 4]);
-}
