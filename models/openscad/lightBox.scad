@@ -35,28 +35,36 @@ module lightBox_wedge(ange=0.0) {
 	);
 }
 
-module lightBox_camera_mount(plateThickness=4.0) {
-       tolerance = 0.125;   // On each edge.  Total is 0.25mm ~ 10 mils
 
-       camera_cable_width = 16.0 + tolerance;
-       camera_cable_thickness = .5; // 0.15 + tolerance;
-       
+module camera_module_import() {
+      // Orient the camera correctly and place edge at 0,0
+      %translate([0,25,0]) rotate([0,0,-90]) import("../stl/camera_1_3.stl");
+}
+
+module lightBox_camera_mount(plateThickness=4.0) {
+       tolerance = 2.0;  // Make it easy to place
+
+       camera_cable_width = 16.5;
+       camera_cable_thickness = 0.15;
+       camera_cable_width_opening = 25.0;  // Make as wide as camera
+       camera_cable_thickness_opening = camera_cable_thickness + tolerance;
+
        difference() {
            cube([measuredInnerWidth-tolerance, measuredInnerWidth-tolerance, plateThickness]);
 
            // Camera Cable Slit
-	   translate([20,20,-plateThickness*2.5])cube([camera_cable_thickness, camera_cable_width, plateThickness*5]); // Cut this out of board
+	   translate([20,15,-plateThickness*2.5])cube([camera_cable_thickness_opening, camera_cable_width_opening, plateThickness*5]); // Cut this out of board
 
            // BackLight pin holes
-	  translate([12,53, -plateThickness*0.5])cylinder(h= plateThickness*5, r=0.7);
-	  translate([ 8,53, -plateThickness*0.5])cylinder(h= plateThickness*5, r=0.7);
+	  translate([12,53, -plateThickness*0.5])cylinder(h= plateThickness*5, r=1.0);
+	  translate([ 8,53, -plateThickness*0.5])cylinder(h= plateThickness*5, r=1.0);
        }
 
       // Make a bar to hold the backlight in place
       translate([4,2,plateThickness])backLight_holder_bar();
 
       // Show the images of the camera and the backlight - but do not use them in building the working object
-      %translate([25,15,plateThickness]) import("../stl/camera_1_3.stl");
+      translate([25,15,plateThickness]) camera_module_import();
       %translate([4,2,plateThickness]) backLight();
 }
 

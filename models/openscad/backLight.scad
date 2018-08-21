@@ -78,7 +78,7 @@ union(){
 
 
 module backLight_holder_bar() {
-tolerance = 0.125;   // On each edge.  Total is 0.25mm ~ 10 mils
+tolerance = 0.5;   // On each edge.  Total is 1mm ~ 40 mils
 barHeight = 2;
 
 difference() {
