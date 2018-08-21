@@ -56,7 +56,7 @@ module lightBox_camera_mount(plateThickness=4.0) {
       translate([4,2,plateThickness])backLight_holder_bar();
 
       // Show the images of the camera and the backlight - but do not use them in building the working object
-      %translate([25,15,plateThickness]) import("../camera_1_3.stl");
+      %translate([25,15,plateThickness]) import("../stl/camera_1_3.stl");
       %translate([4,2,plateThickness]) backLight();
 }
 
