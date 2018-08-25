@@ -78,16 +78,17 @@ union(){
 
 
 module backLight_holder_bar() {
-tolerance = 0.5;   // On each edge.  Total is 1mm ~ 40 mils
-barHeight = 2;
+tolerance = 1.0;   // On each edge.  Total is 2mm ~ 80 mils
+barHeight = 3.0;
+barEnd = 2.5;      // Thickness of bar on each end
 
 difference() {
-    // Solid cube in the shape of the bar
-    translate([-2,0,0]) cube([backLight_width1 + 4, barHeight, backLight_thickness+2]);
+     // Solid cube in the shape of the holding bar
+     translate([-barEnd, 0, 0]) cube([backLight_width1 + 2*barEnd, barHeight, backLight_thickness+2.5]);
 
-    // Hole with slightly bigger dimensions of than lightbar (z axis is much bigger so ends are not microthin)
-    translate([-tolerance/2, -barHeight*2.5, -tolerance/2])cube([backLight_width1+tolerance, barHeight*5, backLight_thickness+tolerance]);
-}
+     // Hole with slightly bigger dimensions of than lightbar (z axis is much bigger so ends are removed cleanly)
+     translate([-tolerance, -barHeight*2.5, -tolerance])cube([backLight_width1+2*tolerance, barHeight*5, backLight_thickness+2*tolerance]);
+    }
 }
 
 // Until documentation is written this is how to instantiate object:
