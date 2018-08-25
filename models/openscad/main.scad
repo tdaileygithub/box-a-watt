@@ -13,23 +13,32 @@ include <lightBox.scad>
 tilt = 4;
 thickness = lightBox_get_default_thickness();
 
-%rotate([-tilt, 0, 0])translate([0,0,thickness])lightBox_model();
+showModels = true;
+//showModels = false;
 
+// =================================================
 // Print the wedge
-lightBox_wedge(angle=tilt);
+// =================================================
+if (!showModels) {
+    translate([75,0,0]) {
+        lightBox_wedge(angle=tilt);
+        //%rotate([-tilt, 0, 0])translate([0,0,thickness])lightBox_model();
+        //%translate([0,0, thickness-6]) rotate([-tilt, 0, 0])lightBox_model();
+	}
+    }
 
-// Print the Camera and Light mount
-//translate([75,0,0]) 
-//lightBox_camera_mount();
+// =================================================
+// Print the Camera Mount
+// Show models of wedge and light box
+// =================================================
+adjustment=1.0;
+translate([adjustment/2, adjustment/2, 0])
+    lightBox_camera_mount(widthAdjustment=-adjustment, heightAdjustment=-adjustment);
 
-// r=.1;
-// w=10;
-// h=20;
-// l=5;
-// t=1.0; // Thicknes
-// //translate([r, r, 0]) rounded_solid_box(w, h, l, r);
-// //translate([r, r, 0])
-// //rounded_hollow_box(w, h, l, t, r);
-// %translate([0,0, -3]) rounded_box_gasket(w, h, t, r, 3);
-// translate([0,0,-3]) rounded_sloped_box_gasket(w, h, t, r, 3, angle);
-// //cube([w,h,l]);
+if (showModels) {
+    // Show the lightBox model
+    %lightBox_model();
+
+    // Show the wedge model (flipped and adjusted)
+    translate([55.75,0.75,185]) rotate([tilt,180,0]) lightBox_wedge(angle=tilt);
+}
