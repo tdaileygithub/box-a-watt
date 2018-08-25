@@ -46,12 +46,7 @@ module lightBox_wedge(ange=0.0) {
 }
 
 
-module lightBox_camera_mount()
+module lightBox_camera_mount(widthAdjustment=0, heightAdjustment=0)
 {
-    // The camera mount is placed in the box.  The width/height of the box vary a lot across the length of the box.
-    // To make it easier to place the camera mount adjust it so that the mount is smaller than the box.
-    tolerance = 2.5;
-    
-    camera_mount(plateWidth=measuredInnerWidth-tolerance, plateHeight=measuredInnerWidth-tolerance, plateThickness=4.0);
-
+    camera_mount(plateWidth=measuredInnerWidth+widthAdjustment, plateHeight=measuredInnerWidth+heightAdjustment, plateThickness=4.0);
 }
