@@ -17,8 +17,8 @@ additionalThickness   =  15.0;
 // The light box is a simple hollow rectangle.  
 module lightBox_model() {
 rounded_hollow_box(
-        width=measuredInnerWidth,
-        height=measuredInnerWidth,
+        width=measuredOuterWidth,
+        height=measuredOuterWidth,
         length=measuredLength,
         thickness=measuredWallThickness,
         cornerRadius=measuredCornerRadius
@@ -28,9 +28,9 @@ rounded_hollow_box(
 
 module lightBox_wedge(ange=0.0) {
     rounded_sloped_box_gasket(
-        width=measuredInnerWidth+.5,              // Tweak
-        height=measuredInnerWidth+.5,             // Tweak
-        wallThickness=measuredWallThickness+3.0,  // Tweak
+        width=measuredOuterWidth,
+        height=measuredOuterWidth,
+        wallThickness=measuredWallThickness,
         cornerRadius=measuredCornerRadius,
         additionalThickness=additionalThickness,
         angle=angle
