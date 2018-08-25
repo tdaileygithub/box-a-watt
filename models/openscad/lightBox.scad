@@ -4,9 +4,9 @@ include <cameraMount.scad>
 
 // Measurements of the the lightbox.
 // Box Dimensions (mm)
-measuredInnerWidth    =  55.0;
-measuredOuterWidth    =  58.0;    // +0.3mm --- varies
-measuredWallThickness =   1.5;
+measuredInnerWidth    =  55.0;    // varies 54.7 to 55.7
+measuredOuterWidth    =  58.0;    // varies 57.5 to 59.0
+measuredWallThickness =   2.0;
 measuredLength        = 176.0;
 
 // For curved edges use a small radius (or 0).
@@ -14,6 +14,9 @@ measuredLength        = 176.0;
 measuredCornerRadius  =   0.5;
 
 additionalThickness   =  15.0; 
+
+// Return the thickness which is used in other modules
+function lightBox_get_default_thickness() = additionalThickness;
 
 // The light box is a simple hollow rectangle.  
 module lightBox_model() {
