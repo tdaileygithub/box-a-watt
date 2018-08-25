@@ -17,15 +17,18 @@ $fn = 150;
 
 // ==================================================================================================
 // Solid Box with the edges rounded
-// If the radius is not set, then no rounding of the edges is done and a rectangular box is created.
+// Setting the radius of curvature to 0 results in a rectangular box.
 // ==================================================================================================
 module rounded_solid_box(width, height, length, radius=0.0)
 {
   diameter = 2*radius;
-  minkowski() {
-    cube(size=[width-diameter, height-diameter, length]);
-    cylinder(r=radius, h=0.01);
-  }
+
+  // Translation is needed to compensate for minkowski resetting edge to radius offset.
+  translate([r, r, 0])
+      minkowski() {
+        cube(size=[width-diameter, height-diameter, length]);
+        cylinder(r=radius, h=0.01);
+      }
 }
 
 // ==================================================================================================
