@@ -64,15 +64,15 @@ linear_extrude(height=backLight_thickness)
 
 module backLight() {
 union(){
-	backLight_lightArea();
+        backLight_lightArea();
 
         // Negative Terminal
         translate([backLight_X2-0.25*backLight_width3,backLight_Y2-1.0,backLight_thickness/2])
-	    rotate([-90,0,0])cylinder(h= 8.0, r=backLight_pin_radius);
+            rotate([-90,0,0])cylinder(h= 8.0, r=backLight_pin_radius);
 
         // Positive Terminal
-	translate([backLight_X1+0.25*backLight_width3,backLight_Y2-1.0,backLight_thickness/2])
-	    rotate([-90,0,0])cylinder(h=10.0, r=backLight_pin_radius);
+        translate([backLight_X1+0.25*backLight_width3,backLight_Y2-1.0,backLight_thickness/2])
+            rotate([-90,0,0])cylinder(h=10.0, r=backLight_pin_radius);
 }
 }
 
@@ -91,6 +91,6 @@ difference() {
     }
 }
 
-// Until documentation is written this is how to instantiate object:
+// Until documentation is written this is how to instantiate objects
 //#backLight();
 //backLight_holder_bar();
