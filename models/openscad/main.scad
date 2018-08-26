@@ -31,7 +31,7 @@ if (!showModels) {
 // Print the Camera Mount
 // Show models of wedge and light box
 // =================================================
-adjustment=1.0;
+adjustment=3.0;  // Backside of box is a lot different than front side!!!
 translate([adjustment/2, adjustment/2, 0])
     lightBox_camera_mount(widthAdjustment=-adjustment, heightAdjustment=-adjustment);
 
