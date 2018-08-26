@@ -8,6 +8,7 @@ module camera_module_import() {
 
 module camera_standoffs(standoffRadius, standoffHeight) {
        // According to specs, the camera mount holes are in a rectangle centered 12.5mm x 21.0mm spacing
+       // The holes are for M2 screws (r>1mm) with the top/bottom clearance pad being 4mm (r=2mm).
       union() {
           translate([ 0,   0,   standoffHeight/2]) cylinder(r=standoffRadius, h=standoffHeight, center=true);
           translate([ 0,  12.5, standoffHeight/2]) cylinder(r=standoffRadius, h=standoffHeight, center=true);
@@ -32,7 +33,7 @@ module camera_mount(plateWidth, plateHeight, plateThickness=4.0) {
                    // Make a bar (4mm x 2mm) to hold the backlight in place
                    translate([4, 2, plateThickness])backLight_holder_bar();
 
-                   // Put the camera standoffs in place so that camera lens is centered
+                   // Put the camera standoffs in place so that camera lens is centered.  Standoff is 4mm in diameter.
                    translate([27,30,plateThickness]) camera_standoffs(standoffRadius=2, standoffHeight=standoffHeight);
            }
       
@@ -46,12 +47,12 @@ module camera_mount(plateWidth, plateHeight, plateThickness=4.0) {
                    cube([camera_cable_thickness_opening, camera_cable_width_opening, plateThickness*5]); // Cut this out of board
 
 
-           // make holes for the BackLight power and ground wires
+           // Make holes for the BackLight power and ground wires
            translate([12,53, -plateThickness*0.5])cylinder(h= plateThickness*5, r=1.0);
            translate([ 8,53, -plateThickness*0.5])cylinder(h= plateThickness*5, r=1.0);
 
-           // Make holes for camera mount (the height should be large to remove any material)
-           translate([27, 30, -100]) camera_standoffs(standoffRadius=1, standoffHeight=200);
+           // Make holes for camera mount (M2 drill size is 1.55mm ~ 1/16".  The height should be large to remove all material).
+           translate([27, 30, -100]) camera_standoffs(standoffRadius=1.55, standoffHeight=200);
       }
 
 
